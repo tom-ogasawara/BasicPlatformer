@@ -9,9 +9,14 @@
       id="canvas"
       width="600"
       height="400"
-      style="background-image:url('./docs/background-image.png')">
+      style="background-image:url('./docs/background2.png')">
     </canvas>
 
     <script type="application/javascript" src="lib/bundle.js"></script>
-
+    <script>
+      MainLoop();
+      function MainLoop() {
+        setTimeout(MainLoop, 1000/60);
+      }
+    </script>
 </html>
