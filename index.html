@@ -4,10 +4,10 @@
   </head>
 
   <body onkeydown="keyDown(event)" onkeyup="keyUp(event)">
-  </body>
+
     <canvas
       id="canvas"
-      width="1200"
+      width="6000"
       height="600"
       style="position: absolute;
         top: 0;
@@ -18,20 +18,97 @@
     <script>
       const canvasEl = document.getElementById("canvas");
       const ctx = canvasEl.getContext("2d");
-      const player = new Object("docs/Player/p1_stand.png", 50, 100, 66, 92);
-      const max_block = 6;
-      const block = new Array();
+      const player = new Object("docs/Player/p1_stand.png", 400, 100, 66, 92);
+      const right_sign = new Object("docs/Tiles/signRight.png", 140, 350, 70, 70);
+      const exit_sign = new Object("docs/Tiles/signExit.png", 280, 350, 70, 70);
 
-      for (let i = 0; i <= max_block; i++) {
-        block[i] = new Object("docs/Tiles/grass.png", 50 + i * 70, 450, 70, 70);
+      // const total_coins = 0;
+      const total_grass = 41;
+      // const total_clouds = 0;
+      // const total_spikes = 0;
+      // const total_plants = 0;
+      // const total_ground = 0;
+
+      // const coin = new Array();
+      const grass = new Array();
+      // const cloud = new Array();
+      // const spike = new Array();
+      // const plant = new Array();
+      // const ground = new Array();
+
+
+      for (let i = 0; i <= 5; i++) {
+        grass[i] = new Object("docs/Tiles/grass.png", 140 + i * 70, 420, 70, 70);
       }
+      for (let i = 6; i <= 9; i++) {
+        grass[i] = new Object("docs/Tiles/grass.png", 210 + i * 70, 350, 70, 70);
+      }
+      for (let i = 10; i <= 14; i++) {
+        grass[i] = new Object("docs/Tiles/grass.png", 350 + i * 70, 420, 70, 70);
+      }
+      grass[15] = new Object("docs/Tiles/grass.png", 1540, 420, 70, 70);
+      grass[16] = new Object("docs/Tiles/grass.png", 1610, 420, 70, 70);
+      grass[17] = new Object("docs/Tiles/grass.png", 1820, 420, 70, 70);
+      grass[18] = new Object("docs/Tiles/grass.png", 1890, 420, 70, 70);
+      grass[19] = new Object("docs/Tiles/grass.png", 2100, 350, 70, 70);
+      grass[20] = new Object("docs/Tiles/grass.png", 2170, 350, 70, 70);
+      grass[21] = new Object("docs/Tiles/grass.png", 2380, 280, 70, 70);
+      grass[22] = new Object("docs/Tiles/grass.png", 2450, 280, 70, 70);
+      grass[23] = new Object("docs/Tiles/grass.png", 2730, 490, 70, 70);
+      grass[24] = new Object("docs/Tiles/grass.png", 2800, 490, 70, 70);
+      grass[25] = new Object("docs/Tiles/grass.png", 2940, 420, 70, 70);
+
+      grass[26] = new Object("docs/Tiles/grass.png", 3150, 490, 70, 70);
+      grass[27] = new Object("docs/Tiles/grass.png", 3220, 490, 70, 70);
+      grass[28] = new Object("docs/Tiles/grass.png", 3290, 490, 70, 70);
+
+      grass[29] = new Object("docs/Tiles/grass.png", 3500, 490, 70, 70);
+      grass[30] = new Object("docs/Tiles/grass.png", 3570, 490, 70, 70);
+      grass[31] = new Object("docs/Tiles/grass.png", 3640, 490, 70, 70);
+
+      grass[32] = new Object("docs/Tiles/grass.png", 3850, 490, 70, 70);
+      grass[33] = new Object("docs/Tiles/grass.png", 3920, 490, 70, 70);
+      grass[34] = new Object("docs/Tiles/grass.png", 3990, 490, 70, 70);
+
+      grass[35] = new Object("docs/Tiles/grass.png", 4200, 420, 70, 70);
+
+      grass[36] = new Object("docs/Tiles/grass.png", 4340, 350, 70, 70);
+
+      grass[37] = new Object("docs/Tiles/grass.png", 4620, 350, 70, 70);
+
+      grass[38] = new Object("docs/Tiles/grass.png", 4830, 490, 70, 70);
+
+      grass[39] = new Object("docs/Tiles/grass.png", 5110, 490, 70, 70);
+
+      grass[40] = new Object("docs/Tiles/grass.png", 5320, 420, 70, 70);
+
+      grass[41] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+
+      grass[42] = new Object("docs/Tiles/grass.png", 5740, 350, 70, 70);
+
+      grass[43] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+      grass[44] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+      grass[45] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+
+      grass[46] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+      grass[47] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+
+      grass[48] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+      grass[49] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+      grass[50] = new Object("docs/Tiles/grass.png", 5530, 350, 70, 70);
+
+
+
+
+
+
 
       let left_pressed = false;
       let right_pressed = false;
       let space_pressed = false;
 
       player.gravity = 20;
-      player.weight = 0.5;
+      player.weight = 0.8;
 
       function keyDown(e) {
         if (String.fromCharCode(e.keyCode) === "%") {
@@ -57,10 +134,27 @@
         }
       }
 
-      MainLoop();
-      function MainLoop() {
+      Animate();
+      function Animate() {
+        for (let i = 0; i <= total_grass; i++) {
+          grass[i].x -= player.velocity_x;
+        }
+        // for (let i = 0; i <= total_clouds; i++) {
+        //   cloud[i].x -= player.velocity_x;
+        // }
+        // for (let i = 0; i <= total_spikes; i++) {
+        //   spike[i].x -= player.velocity_x;
+        // }
+        // for (let i = 0; i <= total_clouds; i++) {
+        //   cloud[i].x -= player.velocity_x;
+        // }
 
-        player.x += player.velocity_x;
+        right_sign.x -= player.velocity_x;
+        exit_sign.x -= player.velocity_x;
+        // door_top.x -= player.velocity_x;
+        // door_bottom.x -= player.velocity_x;
+
+
         player.y += player.velocity_y;
 
         if (left_pressed) {
@@ -71,42 +165,42 @@
           player.velocity_x = 5;
         }
 
-        if (!left_pressed && !right_pressed) {
+        if (!left_pressed && !right_pressed && player.velocity_y === 0) {
           player.velocity_x = 0;
         }
 
         if (space_pressed && player.velocity_y === 0) {
-          player.velocity_y = -12
+          player.velocity_y = -15
         }
 
         if (player.velocity_y < player.gravity) {
           player.velocity_y += player.weight;
         }
 
-        for (let i = 0; i <= max_block; i++) {
-          if (player.isCollidedWith(block[i]) && player.y + player.height < block[i].y + player.velocity_y) {
-            player.y = block[i].y - player.height;
+        for (let i = 0; i <= total_grass; i++) {
+          if (player.isCollidedWith(grass[i]) && player.y + player.height < grass[i].y + player.velocity_y) {
+            player.y = grass[i].y - player.height;
             player.velocity_y = 0;
           }
         }
 
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-        ctx.drawImage(player.Sprite, player.x, player.y);
-        for (let i = 0; i <= max_block; i++) {
-          ctx.drawImage(block[i].Sprite, block[i].x, block[i].y);
+        ctx.drawImage(right_sign.sprite, right_sign.x, right_sign.y);
+        ctx.drawImage(exit_sign.sprite, exit_sign.x, exit_sign.y);
+        for (let i = 0; i <= total_grass; i++) {
+          ctx.drawImage(grass[i].sprite, grass[i].x, grass[i].y);
         }
-        setTimeout(MainLoop, 1000/60);
+        ctx.drawImage(player.sprite, player.x, player.y);
+        setTimeout(Animate, 1000/60);
       }
 
       function Object(img, x, y, width, height) {
-        this.Sprite = new Image();
-        this.Sprite.src = img;
+        this.sprite = new Image();
+        this.sprite.src = img;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.previous_x;
-        this.previous_y;
         this.velocity_x = 0;
         this.velocity_y = 0;
         this.gravity = 0;
@@ -127,4 +221,5 @@
         }
       }
     </script>
+    </body>
 </html>
