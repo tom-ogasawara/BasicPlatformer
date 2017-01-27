@@ -20,21 +20,37 @@
       const ctx = canvasEl.getContext("2d");
       const player = new Object("docs/Player/p1_stand.png", 400, 100, 66, 92);
       const right_sign = new Object("docs/Tiles/signRight.png", 210, 350, 70, 70);
-      const exit_sign = new Object("docs/Tiles/signExit.png", 9940, 420, 70, 70);
+      const exit_sign = new Object("docs/Tiles/signExit.png", 10080, 420, 70, 70);
+      const door_top = new Object("docs/Tiles/door_openTop.png", 9940, 350, 70, 70)
+      const door_bottom = new Object("docs/Tiles/door_openMid.png", 9940, 420, 70, 70)
 
       // const total_coins = 0;
-      const total_grass = 70;
-      // const total_clouds = 0;
+      const total_grass = 72;
+      const total_clouds_a = 20;
+      const total_clouds_b = 20;
+      const total_clouds_c = 20;
       const total_spikes = 1;
       // const total_plants = 0;
       const total_ground = 7;
 
       // const coin = new Array();
       const grass = new Array();
-      // const cloud = new Array();
+      const cloud_a = new Array();
+      const cloud_b = new Array();
+      const cloud_c = new Array();
       const spike = new Array();
       // const plant = new Array();
       const ground = new Array();
+
+      for (let i = 0; i <= total_clouds_a; i++) {
+        cloud_a[i] = new Object("docs/Items/cloud1.png", 10000 * Math.random(), 400 * Math.random(), 70, 70);
+      }
+      for (let i = 0; i <= total_clouds_b; i++) {
+        cloud_b[i] = new Object("docs/Items/cloud2.png", 10000 * Math.random(), 400 * Math.random(), 70, 70);
+      }
+      for (let i = 0; i <= total_clouds_c; i++) {
+        cloud_c[i] = new Object("docs/Items/cloud3.png", 10000 * Math.random(), 400 * Math.random(), 70, 70);
+      }
 
 
       grass[0] = new Object("docs/Tiles/grassLeft.png", 140, 420, 70, 70);
@@ -140,7 +156,9 @@
       grass[67] = new Object("docs/Tiles/grassLeft.png", 9730, 490, 70, 70);
       grass[68] = new Object("docs/Tiles/grassMid.png", 9800, 490, 70, 70);
       grass[69] = new Object("docs/Tiles/grassMid.png", 9870, 490, 70, 70);
-      grass[70] = new Object("docs/Tiles/grassRight.png", 9940, 490, 70, 70);
+      grass[70] = new Object("docs/Tiles/grassMid.png", 9940, 490, 70, 70);
+      grass[71] = new Object("docs/Tiles/grassMid.png", 10010, 490, 70, 70);
+      grass[72] = new Object("docs/Tiles/grassRight.png", 10080, 490, 70, 70);
 
       for (let i = 0; i <= 5; i++) {
         ground[i] = new Object("docs/Tiles/grassCenter_rounded.png", 11140 + i * 70, 490, 70, 70);
@@ -197,24 +215,30 @@
         for (let i = 0; i <= total_spikes; i++) {
           spike[i].x -= player.velocity_x;
         }
-        // for (let i = 0; i <= total_clouds; i++) {
-        //   cloud[i].x -= player.velocity_x;
-        // }
+        for (let i = 0; i <= total_clouds_a; i++) {
+          cloud_a[i].x -= player.velocity_x * 0.6;
+        }
+        for (let i = 0; i <= total_clouds_b; i++) {
+          cloud_b[i].x -= player.velocity_x * 0.8;
+        }
+        for (let i = 0; i <= total_clouds_c; i++) {
+          cloud_c[i].x -= player.velocity_x * 0.7;
+        }
 
         right_sign.x -= player.velocity_x;
         exit_sign.x -= player.velocity_x;
-        // door_top.x -= player.velocity_x;
-        // door_bottom.x -= player.velocity_x;
+        door_top.x -= player.velocity_x;
+        door_bottom.x -= player.velocity_x;
 
 
         player.y += player.velocity_y;
 
         if (left_pressed) {
-          player.velocity_x = -5;
+          player.velocity_x = -6;
         }
 
         if (right_pressed) {
-          player.velocity_x = 5;
+          player.velocity_x = 6;
         }
 
         if (!left_pressed && !right_pressed && player.velocity_y === 0) {
@@ -222,7 +246,7 @@
         }
 
         if (space_pressed && player.velocity_y === 0) {
-          player.velocity_y = -15
+          player.velocity_y = -15;
         }
 
         if (player.velocity_y < player.gravity) {
@@ -237,6 +261,17 @@
         }
 
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+        for (let i = 0; i <= total_clouds_a; i++) {
+          ctx.drawImage(cloud_a[i].sprite, cloud_a[i].x, cloud_a[i].y);
+        }
+        for (let i = 0; i <= total_clouds_b; i++) {
+          ctx.drawImage(cloud_b[i].sprite, cloud_b[i].x, cloud_b[i].y);
+        }
+        for (let i = 0; i <= total_clouds_c; i++) {
+          ctx.drawImage(cloud_c[i].sprite, cloud_c[i].x, cloud_c[i].y);
+        }
+        ctx.drawImage(door_top.sprite, door_top.x, door_top.y);
+        ctx.drawImage(door_bottom.sprite, door_bottom.x, door_bottom.y);
         ctx.drawImage(right_sign.sprite, right_sign.x, right_sign.y);
         ctx.drawImage(exit_sign.sprite, exit_sign.x, exit_sign.y);
         for (let i = 0; i <= total_grass; i++) {
@@ -248,12 +283,14 @@
         for (let i = 0; i <= total_spikes; i++) {
           ctx.drawImage(spike[i].sprite, spike[i].x, spike[i].y);
         }
+
+
         if (player.velocity_y === 0 && player.velocity_x === 0) {
           player.sprite.src = "docs/Player/p1_stand.png";
         } else if (player.velocity_y !== 0) {
           player.sprite.src = "docs/Player/p1_jump.png";
         } else {
-          player.sprite.src = "docs/Player/p1_walk/PNG", 1, 11;
+          player.sprite.src = "docs/Player/p1_walk/PNG/p1_walk04.png";
         }
         ctx.drawImage(player.sprite, player.x, player.y);
         setTimeout(Animate, 1000/60);
@@ -270,7 +307,7 @@
         this.velocity_y = 0;
         this.gravity = 0;
         this.weight = 0;
-        
+
 
         this.isCollidedWith = function (obj) {
           if (this.x > obj.x + obj.width) {
