@@ -7,7 +7,7 @@
 
     <canvas
       id="canvas"
-      width="800"
+      width="11000"
       height="600"
       style="position: absolute;
         top: 0;
@@ -24,23 +24,23 @@
       const door_top = new Object("docs/Tiles/door_openTop.png", 9940, 350, 70, 70)
       const door_bottom = new Object("docs/Tiles/door_openMid.png", 9940, 420, 70, 70)
 
-      // const total_coins = 0;
+      const total_coins = 17;
       const total_grass = 72;
       const total_clouds_a = 20;
       const total_clouds_b = 20;
       const total_clouds_c = 20;
-      const total_spikes = 1;
-      // const total_plants = 0;
-      const total_ground = 7;
+      const total_spikes = 6;
+      const total_ground = 13;
 
-      // const coin = new Array();
+      const coin = new Array();
       const grass = new Array();
       const cloud_a = new Array();
       const cloud_b = new Array();
       const cloud_c = new Array();
       const spike = new Array();
-      // const plant = new Array();
       const ground = new Array();
+
+
 
       for (let i = 0; i <= total_clouds_a; i++) {
         cloud_a[i] = new Object("docs/Items/cloud1.png", 10000 * Math.random(), 400 * Math.random(), 70, 70);
@@ -52,6 +52,36 @@
         cloud_c[i] = new Object("docs/Items/cloud3.png", 10000 * Math.random(), 400 * Math.random(), 70, 70);
       }
 
+
+      coin[0] = new Object("docs/Items/coinGold.png", 630, 280, 70, 70);
+      coin[1] = new Object("docs/Items/coinGold.png", 840, 280, 70, 70);
+
+      coin[2] = new Object("docs/Items/coinGold.png", 1190, 350, 70, 70);
+
+      coin[3] = new Object("docs/Items/coinGold.png", 1715, 280, 70, 70);
+
+      coin[4] = new Object("docs/Items/coinGold.png", 2415, 210, 70, 70);
+
+      coin[5] = new Object("docs/Items/coinGold.png", 2765, 350, 70, 70);
+
+      coin[5] = new Object("docs/Items/coinGold.png", 2940, 350, 70, 70);
+      coin[6] = new Object("docs/Items/coinGold.png", 2940, 280, 70, 70);
+      coin[7] = new Object("docs/Items/coinGold.png", 2940, 210, 70, 70);
+      coin[17] = new Object("docs/Items/coinGold.png", 2940, 140, 70, 70);
+
+      coin[8] = new Object("docs/Items/coinGold.png", 3395, 350, 70, 70);
+
+      coin[9] = new Object("docs/Items/coinGold.png", 3745, 350, 70, 70);
+
+      coin[10] = new Object("docs/Items/coinGold.png", 4200, 280, 70, 70);
+
+      coin[11] = new Object("docs/Items/coinGold.png", 4410, 210, 70, 70);
+      coin[12] = new Object("docs/Items/coinGold.png", 4480, 210, 70, 70);
+      coin[13] = new Object("docs/Items/coinGold.png", 4550, 210, 70, 70);
+
+      coin[14] = new Object("docs/Items/coinGold.png", 4900, 350, 70, 70);
+      coin[15] = new Object("docs/Items/coinGold.png", 4970, 350, 70, 70);
+      coin[16] = new Object("docs/Items/coinGold.png", 5040, 350, 70, 70);
 
       grass[0] = new Object("docs/Tiles/grassLeft.png", 140, 420, 70, 70);
       grass[1] = new Object("docs/Tiles/grassMid.png", 210, 420, 70, 70);
@@ -102,13 +132,13 @@
 
       grass[35] = new Object("docs/Tiles/grass.png", 4200, 420, 70, 70);
 
-      grass[36] = new Object("docs/Tiles/grass.png", 4340, 350, 70, 70);
+      grass[36] = new Object("docs/Tiles/grassLeft.png", 4340, 350, 70, 70);
 
-      grass[37] = new Object("docs/Tiles/grass.png", 4620, 350, 70, 70);
+      grass[37] = new Object("docs/Tiles/grassRight.png", 4620, 350, 70, 70);
 
-      grass[38] = new Object("docs/Tiles/grass.png", 4830, 490, 70, 70);
+      grass[38] = new Object("docs/Tiles/grassLeft.png", 4830, 490, 70, 70);
 
-      grass[39] = new Object("docs/Tiles/grass.png", 5110, 490, 70, 70);
+      grass[39] = new Object("docs/Tiles/grassRight.png", 5110, 490, 70, 70);
 
       grass[40] = new Object("docs/Tiles/grass.png", 5320, 420, 70, 70);
 
@@ -166,12 +196,30 @@
       ground[6] = new Object("docs/Tiles/grassMid.png", 1680, 420, 70, 70);
       ground[7] = new Object("docs/Tiles/grassMid.png", 1750, 420, 70, 70);
 
+      ground[8] = new Object("docs/Tiles/grassMid.png", 4410, 350, 70, 70);
+      ground[9] = new Object("docs/Tiles/grassMid.png", 4480, 350, 70, 70);
+      ground[10] = new Object("docs/Tiles/grassMid.png", 4550, 350, 70, 70);
+
+      ground[11] = new Object("docs/Tiles/grassMid.png", 4900, 490, 70, 70);
+      ground[12] = new Object("docs/Tiles/grassMid.png", 4970, 490, 70, 70);
+      ground[13] = new Object("docs/Tiles/grassMid.png", 5040, 490, 70, 70);
+
+
+
       spike[0] = new Object("docs/Items/spikes.png", 1715, 350, 70, 70);
-      spike[1] = new Object("docs/Items/spikes.png", 11750, 350, 70, 70);
+
+      spike[1] = new Object("docs/Items/spikes.png", 4410, 280, 70, 70);
+      spike[2] = new Object("docs/Items/spikes.png", 4480, 280, 70, 70);
+      spike[3] = new Object("docs/Items/spikes.png", 4550, 280, 70, 70);
+
+      spike[4] = new Object("docs/Items/spikes.png", 4900, 420, 70, 70);
+      spike[5] = new Object("docs/Items/spikes.png", 4970, 420, 70, 70);
+      spike[6] = new Object("docs/Items/spikes.png", 5040, 420, 70, 70);
 
 
 
 
+      let coin_count = 0;
 
       let left_pressed = false;
       let right_pressed = false;
@@ -212,6 +260,13 @@
         for (let i = 0; i <= total_ground; i++) {
           ground[i].x -= player.velocity_x;
         }
+        for (let i = 0; i <= total_coins; i++) {
+          coin[i].x -= player.velocity_x;
+          coin[i].y += coin[i].velocity_y;
+          if (coin[i].velocity_y < player.gravity && coin[i].velocity_y !== 0) {
+            coin[i].velocity_y += player.weight;
+          }
+        }
         for (let i = 0; i <= total_spikes; i++) {
           spike[i].x -= player.velocity_x;
         }
@@ -230,8 +285,8 @@
         door_top.x -= player.velocity_x;
         door_bottom.x -= player.velocity_x;
 
-
         player.y += player.velocity_y;
+
 
         if (left_pressed) {
           player.velocity_x = -6;
@@ -260,6 +315,21 @@
           }
         }
 
+        for (let i = 0; i <= total_coins; i++) {
+          if (player.isCollidedWith(coin[i])) {
+            coin[i].velocity_y += 1;
+          }
+          if (coin[i].y > 500 && coin[i].y < 520) {
+            coin_count += 1;
+          }
+        }
+
+        // for (let i = 0; i <= total_spikes; i++) {
+        //   if (player.isCollidedWith(spike[i])) {
+        //     player.velocity_x = 0;
+        //   }
+        // }
+
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
         for (let i = 0; i <= total_clouds_a; i++) {
           ctx.drawImage(cloud_a[i].sprite, cloud_a[i].x, cloud_a[i].y);
@@ -276,6 +346,9 @@
         ctx.drawImage(exit_sign.sprite, exit_sign.x, exit_sign.y);
         for (let i = 0; i <= total_grass; i++) {
           ctx.drawImage(grass[i].sprite, grass[i].x, grass[i].y);
+        }
+        for (let i = 0; i <= total_coins; i++) {
+          ctx.drawImage(coin[i].sprite, coin[i].x, coin[i].y);
         }
         for (let i = 0; i <= total_ground; i++) {
           ctx.drawImage(ground[i].sprite, ground[i].x, ground[i].y);
