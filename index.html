@@ -1,9 +1,12 @@
 <html>
   <head>
-    <title>Basic Platformer</title>
+    <title>Paul the Alien</title>
 
-    <link rel="stylesheet" href="app.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="assets/app.css" type="text/css" media="screen">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="lib/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/sweetalert.css">
+
   </head>
 
   <body class="body" onkeydown="keyDown(event)" onkeyup="keyUp(event)">
@@ -16,7 +19,7 @@
         background-image: url('./docs/bg.png')">
     </canvas>
 
-    <script type="text/javascript" src="lib/app.js"></script>
+    <script onkeydown="keyDown(event)" onkeyup="keyUp(event)" type="application/javascript" src="lib/bundle.js"></script>
 
     <div id="button-container">
       <a href="https://github.com/tom-ogasawara">
